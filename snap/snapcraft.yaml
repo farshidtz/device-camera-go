@@ -41,17 +41,16 @@ apps:
       REGISTRY_ARG: "--registry"
       DEVICE_PROFILESDIR: "$SNAP_DATA/config/device-camera/res/profiles"
       DEVICE_DEVICESDIR: "$SNAP_DATA/config/device-camera/res/devices"
-      SECRETSTORE_TOKENFILE: $SNAP_DATA/device-camera/secrets-token.json
+      SECRETSTORE_TOKENFILE: $SNAP_DATA/config/device-camera/secrets-token.json
     daemon: simple
     passthrough:
       install-mode: disable
     plugs: [network, network-bind]
 
 plugs:
-  device-config:
+  config:
     interface: content 
-    content: device-config
-    target: $SNAP_DATA/config/device-camera/res
+    target: $SNAP_DATA/config
 
 parts:
   version:
