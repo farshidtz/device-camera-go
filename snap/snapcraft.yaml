@@ -1,5 +1,5 @@
 name: edgex-device-camera
-base: core18
+base: core20
 adopt-info: version
 license: Apache-2.0
 summary: Control/communicate with ONVIF-compliant cameras using Camera Device Service
