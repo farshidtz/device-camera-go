@@ -41,7 +41,7 @@ apps:
       REGISTRY_ARG: "--registry"
       DEVICE_PROFILESDIR: "$SNAP_DATA/config/device-camera/res/profiles"
       DEVICE_DEVICESDIR: "$SNAP_DATA/config/device-camera/res/devices"
-      SECRETSTORE_TOKENFILE: $SNAP_DATA/config/device-camera/secrets-token.json
+      SECRETSTORE_TOKENFILE: $SNAP_DATA/device-camera/secrets-token.json
     daemon: simple
     passthrough:
       install-mode: disable
@@ -49,8 +49,10 @@ apps:
 
 plugs:
   config:
-    interface: content 
-    target: $SNAP_DATA/config
+    interface: content
+    # The provider may mount one or more items inside the target
+    #   to supply config files such as server config, profiles, and secrets.
+    target: $SNAP_DATA
 
 parts:
   version:
