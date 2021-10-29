@@ -87,6 +87,35 @@ func installDevProfiles() error {
 	return nil
 }
 
+// installFiles copies one or more files
+//	from $SNAP/relativePath to $SNAP_DATA/relativePath,
+// 	creating all necessary parent directories.
+// The function returns error before creating directories if the source files do not exist
+func installFiles(relativePaths ...string) error {
+	for _, path := range relativePaths {
+		srcFile := hooks.Snap + path
+		destFile := hooks.SnapData + path
+
+		// read the file first to make sure it exists
+		input, err := os.ReadFile(srcFile)
+		if err != nil {
+			return err
+		}
+
+		// make directory hierarchy
+		err = os.MkdirAll(filepath.Dir(destFile), 0755)
+		if err != nil {
+			return err
+		}
+
+		err = os.WriteFile(destFile, input, 0644)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func main() {
 	var err error
 
